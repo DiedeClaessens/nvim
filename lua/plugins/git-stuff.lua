@@ -14,6 +14,15 @@ return {
 
       vim.keymap.set("n", "<leader>gh", ":Gitsigns preview_hunk<CR>", {})
       vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", {})
-    end
+    end,
+    opts ={
+      signs = {
+        add = { text = '+' },
+        change = { text = '~' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
+      }
+    }
   }
 }
