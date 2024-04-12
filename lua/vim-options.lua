@@ -45,3 +45,15 @@ vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 
 vim.cmd("set scrolloff=10")
+
+-- some nice keymaps
+vim.keymap.set("n", "<leader>yy", '<cmd>let @+ = expand("%:p")<CR>')
+
+-- Some Buffer stuff
+vim.keymap.set("n", "<leader>bc", "<cmd>bdelete<CR>")
+vim.keymap.set("n", "<leader>bn", "<cmd>bnext<CR>")
+vim.keymap.set("n", "<leader>bp", "<cmd>bprevious<CR>")
+vim.keymap.set("n", "<leader><leader>", "<c-^>")
+
+-- Relative line nummbers
+vim.wo.relativenumber = true
