@@ -17,6 +17,8 @@ return {
 			local builtin = require("telescope.builtin")
 			--			vim.keymap.set("n", "<leader>ff", builtin.git_files, {})
 			vim.keymap.set("n", "<leader>f", builtin.find_files, {})
+			-- seems faster
+			vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 			vim.keymap.set("n", "<leader>fst", builtin.live_grep, {})
 			vim.keymap.set("n", "<leader>fo", builtin.oldfiles, {})
 			vim.keymap.set("n", "<leader>bb", builtin.buffers, {})
