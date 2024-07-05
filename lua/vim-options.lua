@@ -48,6 +48,8 @@ vim.cmd("set scrolloff=10")
 
 -- some nice keymaps
 vim.keymap.set("n", "<leader>yy", '<cmd>let @+ = expand("%:p")<CR>')
+-- quick save
+vim.keymap.set("n", "<leader>w", "<cmd>w<cr>")
 
 -- Some Buffer stuff
 vim.keymap.set("n", "<leader>bc", "<cmd>bdelete<CR>")
@@ -57,3 +59,7 @@ vim.keymap.set("n", "<leader><leader>", "<c-^>")
 
 -- Relative line nummbers
 vim.wo.relativenumber = true
+
+-- Terminal shortkey
+vim.keymap.set("n", "<leader>tt", "<cmd>vsplit term://fish<CR>")
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
