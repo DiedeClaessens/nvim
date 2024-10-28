@@ -26,6 +26,7 @@ return {
 			vim.keymap.set("n", "<leader>fs", builtin.spell_suggest, {})
 			vim.keymap.set("n", "<leader>fh", builtin.highlights, {})
 			vim.keymap.set("n", "<leader>fr", builtin.registers, {})
+			vim.keymap.set("n", "<leader>fd", builtin.resume, {})
 
 			require("telescope").load_extension("ui-select")
 		end,
