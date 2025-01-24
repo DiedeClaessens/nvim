@@ -17,6 +17,15 @@ vim.keymap.set("n", "<c-l>", ":wincmd l<CR>")
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
 vim.wo.number = true
 
+-- Move line up or down
+-- single-line
+vim.keymap.set("n", "<A-j>", ":move .+1<CR>==")
+vim.keymap.set("n", "<A-k>", ":move .-2<CR>==")
+
+-- multi-line
+vim.keymap.set("v", "<A-j>", ":move '>+1<CR>gv=gv")
+vim.keymap.set("v", "<A-k>", ":move '<-2<CR>gv=gv")
+
 -- Diagnostic keymaps
 -- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 -- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
