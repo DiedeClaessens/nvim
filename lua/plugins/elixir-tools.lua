@@ -5,10 +5,10 @@ return {
 	config = function()
 		local elixir = require("elixir")
 		elixir.setup({
-			nextls = { enable = true },
+			nextls = { enable = false },
 			credo = { enable = true },
 			elixirls = {
-				enable = false,
+				enable = true,
 			},
 		})
 	end,
