@@ -2,7 +2,13 @@ return {
   "stevearc/oil.nvim",
   config = function()
     local oil = require("oil")
-    oil.setup()
-    vim.keymap.set("n", "-", oil.toggle_float, {})
+    oil.setup(
+      {
+        view_options = {
+          -- Show files and directories that start with "."
+          show_hidden = true
+        }
+      }
+    )
   end,
 }
