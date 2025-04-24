@@ -126,15 +126,35 @@ vim.keymap.set("n", "<leader>dbg", function()
   vim.fn.setqflist({}, " ", { lines = output, title = "Ripgrep dbg" })
   vim.cmd("copen")
 end, { desc = "Search for 'dbg' with rg and load into quickfix" })
+-- Load credo into quickfix
+vim.keymap.set("n", "<leader>cr", function()
+  local cwd = vim.fn.getcwd()
+  local cmd = " mix credo --strict --format flycheck --no-color --ignore Credo.Check.Design.TagTODO"
+  local result = vim.fn.systemlist(cmd)
+  if #result > 0 then
+    local quickfix_items = {}
+
+    for _, line in ipairs(result) do
+      local file, line_no, column = line:match("^(.-):(%d+):(%d+):")
+      local full_path = cwd .. "/" .. file
+      local line_num = tonumber(line_no)
+
+      table.insert(quickfix_items, { filename = full_path, lnum = line_num })
+    end
+    vim.fn.setqflist(quickfix_items, 'r')
+    vim.cmd("copen")
+    vim.cmd("cfirst")
+  end
+end, { desc = "Load credo into quickfix" })
 
 vim.keymap.set("n", "<leader>mt", function()
   vim.cmd("terminal mix test")
-end, {desc = "Run mix test"})
+end, { desc = "Run mix test" })
 
 
 vim.keymap.set("n", "<leader>mtf", function()
   vim.cmd("terminal mix test " .. vim.fn.expand("%"))
-end, {desc = "Run mix test for current file"})
+end, { desc = "Run mix test for current file" })
 
 
 
