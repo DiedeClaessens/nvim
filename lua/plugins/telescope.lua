@@ -5,7 +5,7 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.5",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = { "nvim-lua/plenary.nvim", 'jonarrien/telescope-cmdline.nvim', },
     config = function()
       require("telescope").setup({
         extensions = {
@@ -22,6 +22,7 @@ return {
       vim.keymap.set("n", "<leader>fs", builtin.spell_suggest, { desc = "Search for spelling suggestions" })
       vim.keymap.set("n", "<leader>fh", builtin.registers, { desc = "Search for registers" })
       vim.keymap.set("n", "<leader>fd", builtin.resume, { desc = "Resume last search" })
+      vim.keymap.set('n', '<leader>c', ':Telescope cmdline<CR>', { noremap = true, desc = "Cmdline" })
 
       require("telescope").load_extension("ui-select")
 
