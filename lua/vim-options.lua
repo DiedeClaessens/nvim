@@ -56,7 +56,7 @@ vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 vim.cmd("set scrolloff=10")
 
 -- some nice keymaps
-vim.keymap.set("n", "<leader>yy", '<cmd>let @+ = expand("%:p")<CR>')
+vim.keymap.set("n", "<leader>yy", '<cmd>let @+ = expand("%:p").":".line(".")<CR>')
 -- quick save
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>")
 
@@ -148,13 +148,21 @@ vim.keymap.set("n", "<leader>cr", function()
 end, { desc = "Load credo into quickfix" })
 
 vim.keymap.set("n", "<leader>mt", function()
+  vim.cmd("vsplit")
   vim.cmd("terminal mix test")
 end, { desc = "Run mix test" })
 
 
 vim.keymap.set("n", "<leader>mtf", function()
+  vim.cmd("vsplit")
   vim.cmd("terminal mix test " .. vim.fn.expand("%"))
 end, { desc = "Run mix test for current file" })
+
+vim.keymap.set("n", "<leader>mtl", function()
+  vim.cmd("vsplit")
+  vim.cmd("terminal mix test " .. vim.fn.expand("%") .. ":" .. vim.fn.line("."))
+end, { desc = "Run mix test for current line" })
+
 
 
 
@@ -166,4 +174,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
-vim.keymap.set("n", "-", "<cmd>e .<CR>")
+vim.keymap.set("n", "=", "<cmd>e .<CR>")
+vim.keymap.set("n", "-", function()
+  vim.cmd("e " .. vim.fn.expand("%:p:h"))
+end, { desc = "Open file explorer" })
