@@ -17,6 +17,9 @@ vim.keymap.set("n", "<c-l>", ":wincmd l<CR>")
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
 vim.wo.number = true
 
+-- paste in visual mode with out losing register
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
 -- Move line up or down
 -- single-line
 vim.keymap.set("n", "<A-j>", ":move .+1<CR>==")
@@ -47,12 +50,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
--- Disable arrow keys in normal mode
-vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
-
+-- -- Disable arrow keys in normal mode
+-- vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
+-- vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
+-- vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
+-- vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
+--
 vim.cmd("set scrolloff=10")
 
 -- some nice keymaps
@@ -163,6 +166,10 @@ vim.keymap.set("n", "<leader>mtl", function()
   vim.cmd("terminal mix test " .. vim.fn.expand("%") .. ":" .. vim.fn.line("."))
 end, { desc = "Run mix test for current line" })
 
+vim.keymap.set("n", "<leader>o", function()
+  vim.cmd("vsplit")
+  vim.cmd("terminal odin run .")
+end, { desc = "Run mix test for current line" })
 
 
 
@@ -174,7 +181,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
-vim.keymap.set("n", "=", "<cmd>e .<CR>")
 vim.keymap.set("n", "-", function()
   vim.cmd("e " .. vim.fn.expand("%:p:h"))
 end, { desc = "Open file explorer" })
