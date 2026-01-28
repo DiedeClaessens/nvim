@@ -19,15 +19,17 @@ return {
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      local lspconfig = require("lspconfig")
-      lspconfig.html.setup({
-        capabilities = capabilities,
-      })
-      lspconfig.lua_ls.setup({
+      vim.lsp.config('html', {
         capabilities = capabilities,
       })
 
-      require 'lspconfig'.ols.setup {}
+      vim.lsp.config('lua_ls', {
+        capabilities = capabilities,
+      })
+      vim.lsp.config('ols', {})
+      vim.lsp.config('elixir_ls', {
+        capabilities = capabilities,
+      })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})

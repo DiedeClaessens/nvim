@@ -32,7 +32,7 @@ vim.keymap.set("v", "<A-k>", ":move '<-2<CR>gv=gv")
 -- Diagnostic keymaps
 -- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 -- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
--- vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Show [D]iagnostic [E]rror messages' })
+vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Show [D]iagnostic [E]rror messages' })
 -- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Highlight when yanking (copying) text
@@ -184,3 +184,12 @@ vim.api.nvim_create_autocmd("TermOpen", {
 vim.keymap.set("n", "-", function()
   vim.cmd("e " .. vim.fn.expand("%:p:h"))
 end, { desc = "Open file explorer" })
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    local arg = vim.fn.argv(0)
+    if arg ~= "" and vim.fn.isdirectory(arg) == 1 then
+      require("oil").open(arg)
+    end
+  end,
+})
