@@ -187,9 +187,19 @@ end, { desc = "Open file explorer" })
 
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
-    local arg = vim.fn.argv(0)
-    if arg ~= "" and vim.fn.isdirectory(arg) == 1 then
-      require("oil").open(arg)
+    local argc = vim.fn.argc()
+    local arg0 = vim.fn.argv(0)
+
+    -- Case 1: `nvim` → open Oil in current dir
+    if argc == 0 then
+      require("oil").open(vim.loop.cwd())
+      return
     end
+
+    -- Case 2: `nvim <dir>` → open Oil in that dir
+    if argc == 1 and vim.fn.isdirectory(arg0) == 1 then
+      require("oil").open(arg0)
+    end
+    -- Case 3: `nvim file.txt` → do nothing (normal behavior)
   end,
 })
